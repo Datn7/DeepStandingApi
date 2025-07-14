@@ -7,6 +7,17 @@ namespace DeepStandingApi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Cors configuration
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -22,6 +33,9 @@ namespace DeepStandingApi
             }
 
             app.UseHttpsRedirection();
+
+            //Use CORS
+            app.UseCors();
 
             app.UseAuthorization();
 
