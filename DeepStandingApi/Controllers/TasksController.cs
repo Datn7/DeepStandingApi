@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeepStandingApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DeepStandingApi.Controllers
 {
@@ -6,16 +7,24 @@ namespace DeepStandingApi.Controllers
     [Route("api/[controller]")]
     public class TasksController : ControllerBase
     {
-        private static List<string> tasks = new() { "Learn Angular", "Build UI", "Connect API" };
+        private static List<TaskModel> tasks = new()
+    {
+        new TaskModel { Title = "Learn Angular", Priority = "normal" },
+        new TaskModel { Title = "Build UI", Priority = "high" }
+    };
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetTasks() => Ok(tasks);
+        public ActionResult<IEnumerable<TaskModel>> GetTasks() => Ok(tasks);
 
         [HttpPost]
-        public ActionResult AddTask([FromBody] string task)
+        public IActionResult CreateTask([FromBody] TaskModel task)
         {
-            tasks.Add(task);
+            if (task == null || string.IsNullOrEmpty(task.Title))
+                return BadRequest("Invalid task");
+
+
             return Ok();
         }
+
     }
 }
