@@ -22,8 +22,9 @@ namespace DeepStandingApi.Controllers
             if (task == null || string.IsNullOrEmpty(task.Title))
                 return BadRequest("Invalid task");
 
+            tasks.Add(task);
 
-            return Ok();
+            return Ok(task);
         }
 
     }
