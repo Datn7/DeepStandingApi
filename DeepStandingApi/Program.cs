@@ -1,4 +1,3 @@
-
 namespace DeepStandingApi
 {
     public class Program
@@ -19,26 +18,26 @@ namespace DeepStandingApi
             });
 
             // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+
+            // Add Swagger/OpenAPI support
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI(); // Add this to enable the Swagger UI
             }
 
             app.UseHttpsRedirection();
 
-            //Use CORS
             app.UseCors();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
