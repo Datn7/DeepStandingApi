@@ -38,6 +38,22 @@ namespace DeepStandingApi.Controllers
             return Ok();
         }
 
+        [HttpPut("{title}")]
+        public IActionResult UpdateTask(string title, [FromBody] TaskModel updatedTask)
+        {
+            var existingTask = tasks.FirstOrDefault(t => t.Title == title);
+            if (existingTask == null)
+                return NotFound("Task not found");
+
+            // Update fields
+            existingTask.Title = updatedTask.Title;
+            existingTask.Description = updatedTask.Description;
+            existingTask.Priority = updatedTask.Priority;
+
+            return Ok(existingTask);
+        }
+
+
 
     }
 }
