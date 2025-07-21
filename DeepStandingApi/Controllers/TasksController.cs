@@ -27,5 +27,17 @@ namespace DeepStandingApi.Controllers
             return Ok(task);
         }
 
+        [HttpDelete("{title}")]
+        public IActionResult DeleteTask(string title)
+        {
+            var task = tasks.FirstOrDefault(t => t.Title == title);
+            if (task == null)
+                return NotFound("Task not found");
+
+            tasks.Remove(task);
+            return Ok();
+        }
+
+
     }
 }
