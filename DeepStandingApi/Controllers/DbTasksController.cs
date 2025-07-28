@@ -1,5 +1,6 @@
 ﻿using DeepStandingApi.Data;
 using DeepStandingApi.Models;
+using DeepStandingApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,12 @@ namespace DeepStandingApi.Controllers
     public class DbTasksController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly ILogService _log;
 
-        public DbTasksController(AppDbContext context)
+        public DbTasksController(AppDbContext context, ILogService log)
         {
             _context = context;
+            _log = log;
         }
 
         [HttpGet]
