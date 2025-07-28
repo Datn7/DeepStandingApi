@@ -1,3 +1,6 @@
+using DeepStandingApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace DeepStandingApi
 {
     public class Program
@@ -5,6 +8,13 @@ namespace DeepStandingApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // 1. Configure SQL Server connection string
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            // 2. Register AppDbContext
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
             // Cors configuration
             builder.Services.AddCors(options =>
