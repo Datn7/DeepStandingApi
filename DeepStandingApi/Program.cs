@@ -1,5 +1,6 @@
 using DeepStandingApi.Data;
 using DeepStandingApi.Services;
+using DeepStandingApi.Services.DI;
 using Microsoft.EntityFrameworkCore;
 
 namespace DeepStandingApi
@@ -18,6 +19,9 @@ namespace DeepStandingApi
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<ILogService, ConsoleLogService>();
+            builder.Services.AddSingleton<SingletonService>();
+            builder.Services.AddScoped<ScopedService>();
+            builder.Services.AddTransient<TransientService>();
 
             // Cors configuration
             builder.Services.AddCors(options =>
