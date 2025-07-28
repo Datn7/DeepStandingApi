@@ -14,7 +14,7 @@ namespace DeepStandingApi
 
             // 2. Register AppDbContext
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Cors configuration
             builder.Services.AddCors(options =>
