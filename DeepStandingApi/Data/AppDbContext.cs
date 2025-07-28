@@ -9,5 +9,6 @@ namespace DeepStandingApi.Data
             : base(options) { }
 
         public DbSet<TaskModel> Tasks { get; set; }
+        public DbSet<UserModel> Users { get; set; }
     }
 }
